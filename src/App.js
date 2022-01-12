@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+// Components
+import Lamp from './Lamp';
+import LightSwitch from './LightSwitch';
+
+const Room = styled.div`
+  position: relative;
+  width: 500px;
+  height: 500px;
+  border: 10px solid black;
+  margin: 0 auto;
+`;
 
 function App() {
+  // Lamp one
+  const [isLampOneOn, setIsLampOneOn] = useState(false);
+  // Lamp two
+  const [isLampTwoOn, setIsLampTwoOn] = useState(true);
+
+  const handleLightSwitchOne = () => setIsLampOneOn(prev => !prev);
+  const handleLightSwitchTwo = () => setIsLampTwoOn(prev => !prev);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Room>
+      <Lamp lampOn={isLampOneOn} position='left' />
+      <Lamp lampOn={isLampTwoOn} position='right' />
+      <LightSwitch
+        name='one'
+        callback={handleLightSwitchOne}
+        switchOn={isLampOneOn}
+        position='left'
+      />
+      <LightSwitch
+        name='two'
+        callback={handleLightSwitchTwo}
+        switchOn={isLampTwoOn}
+        position='right'
+      />
+    </Room>
   );
 }
 
