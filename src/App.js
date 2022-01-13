@@ -33,15 +33,20 @@ function App() {
 
   return (
     //Room component in JSX
-    //Lamp component
+    //Lamp component has 2 props - lampOn and position
     //lampOn prop, position prop - a prop is an object
+    // A prop gets sent along in the component 
+    //lampOn is a boolean object
+    //position determines whether the lamp is to the left or to the right in Room
     //LightSwitch component
     <Room>
       <Lamp lampOn={isLampOneOn} position='left' />
       <Lamp lampOn={isLampTwoOn} position='right' />
-      <LightSwitch
+      <LightSwitch //a child of the Lamp
         name='one'
+        //callback prop
         callback={handleLightSwitchOne}
+        //holds the state of the lamp
         switchOn={isLampOneOn}
         position='left'
       />
