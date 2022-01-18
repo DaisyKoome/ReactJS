@@ -9,7 +9,7 @@ const app = express()
 //req is used when getting info from the front end
 //res is used when posting info to the front end
 app.get('/', (req,res)=> {
-    res.send("Hello world");
+    res.send("Hello Deedee");
 })
 
 //port, arrow function
