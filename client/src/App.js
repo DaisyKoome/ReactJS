@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import './App.css';
-import Axios from 'axios'
+import "./App.css";
+import Axios from "axios"
 
 function App() {
 
@@ -13,7 +13,14 @@ function App() {
     //localhost:3001 is the API
     //The '/' route is not going to be used for making the post requests
     //A separate route is being made in the server for the API 
-    Axios.post('http://localhost:3001/')
+    //We're sending an object with a movieName and a movieReview to the backend (server)
+    //Body-parser middleware changes everything to JSON format
+    Axios.post("http://localhost:3001/api/insert", {
+      movieName: movieName, 
+      movieReview: review,
+    }).then(() => {
+      alert("Successful insert");
+    });
   };
 
   return (
