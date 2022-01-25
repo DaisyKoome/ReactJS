@@ -3,14 +3,15 @@
 //We're sending an object with a movieName and a movieReview to the backend (server)
 //Body-parser middleware changes everything to JSON format
 const express = require("express");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
+const cors = require ("cors");
 const app = express();
 const mysql = require ("mysql");
 
 const db = mysql.createPool({
     hostname: 'localhost',
-    user: 'phpmyadmin',
-    password: 'kimali1234',
+    user: 'root',
+    password: 'password',
     database: 'CRUDDatabase',
 });
 
@@ -27,16 +28,25 @@ const db = mysql.createPool({
 }) */
 
 //apply the bodyParser middleware
+app.use(cors());
+//grab data as json from the frontend
+app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}))
 
 //Now we need to request or the info from front end using req
+//use req to 'catch' the data from front end which is then being parsed into the SQL statement below
 
 app.post("/api/insert", (req, res)=> {
 
+    const movieName = req.body.movieName;
+    const movieReview = req.body.movieReview;
+
     const sqlInsert = "INSERT INTO movie_reviews (movieName, movieReview) VALUES (?,?);"
     db.query(sqlInsert, [movieName, movieReview], (err, result) => {
-
-    })
+        //console.log(result);
+        //console log the error
+        console.log(err);
+    });
 });
 
 //port, arrow function
