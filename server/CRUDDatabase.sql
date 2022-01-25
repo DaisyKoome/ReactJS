@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 25, 2022 at 02:19 AM
+-- Generation Time: Jan 25, 2022 at 03:29 AM
 -- Server version: 8.0.27-0ubuntu0.20.04.1
 -- PHP Version: 7.4.3
 
@@ -41,7 +41,10 @@ CREATE TABLE `movie_reviews` (
 INSERT INTO `movie_reviews` (`id`, `movieName`, `movieReview`) VALUES
 (1, 'princess switch', 'great movie'),
 (2, 'dont look up', 'trendy'),
-(3, 'Inception', 'good movie');
+(3, 'Inception', 'good movie'),
+(4, 'home alone', 'funny'),
+(7, 'gemini man', 'witty'),
+(8, 'robinhood', 'epic');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +64,7 @@ ALTER TABLE `movie_reviews`
 -- AUTO_INCREMENT for table `movie_reviews`
 --
 ALTER TABLE `movie_reviews`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
