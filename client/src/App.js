@@ -4,8 +4,8 @@ import Axios from "axios"
 
 function App() {
 
-  const [movieName, setMovieName] = useState("")
-  const [review, setReview] = useState("")
+  const [movieName, setMovieName] = useState("");
+  const [review, setReview] = useState("");
   
   //Function to be called whenever the submit button is pressed
   const submitReview = () => {
@@ -16,6 +16,7 @@ function App() {
     //We're sending an object with a movieName and a movieReview to the backend (server)
     //Body-parser middleware changes everything to JSON format
     Axios.post("http://localhost:3001/api/insert", {
+      //parse 2 variables as an object from frontend
       movieName: movieName, 
       movieReview: review,
     }).then(() => {
