@@ -6,13 +6,19 @@ function App() {
 
   const [movieName, setMovieName] = useState("");
   const [review, setReview] = useState("");
+
+  //Display a list with the movie names and reviews
+  //create a state called movieReviewList (an array)
+  const [movieReviewList, setMovieList] = useState([]);
   
   //Display all movie reviews after the form
   useEffect(()=> {
     //make an axios request
     //the response variable will contain the JSON from back end
     Axios.get("http://localhost:3001/api/get").then((response)=>{
-      console.log(response.data);
+      //console.log(response.data);
+      //set the movieList to store the data gotten from backend (the response)
+      setMovieList(response.data);
     });
   }, []);
 
@@ -48,6 +54,12 @@ function App() {
         }}/>
         
         <button onClick={submitReview}>Submit</button>
+
+        {movieReviewList.map((val)=>{
+          return <h1>
+            MovieName: {val.movieName} | MovieReview: {val.movieReview}
+            </h1>
+        })}
       </div>
     </div>
   );
