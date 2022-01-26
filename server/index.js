@@ -36,6 +36,16 @@ app.use(bodyParser.urlencoded({extended:true}))
 //Now we need to request or the info from front end using req
 //use req to 'catch' the data from front end which is then being parsed into the SQL statement below
 
+//get all the movie reviews that already exist - send a JSON that contains all the movie reviews in the DB
+app.get("/api/get", (req,res) => {
+    const sqlSelect = "SELECT * FROM movie_reviews;"
+    db.query(sqlSelect,(err, result) => {
+        //console.log(result);
+        //console log the error
+        console.log(result);
+    });
+})
+
 app.post("/api/insert", (req, res)=> {
 
     const movieName = req.body.movieName;
@@ -45,7 +55,7 @@ app.post("/api/insert", (req, res)=> {
     db.query(sqlInsert, [movieName, movieReview], (err, result) => {
         //console.log(result);
         //console log the error
-        console.log(err);
+        console.log(result);
     });
 });
 
