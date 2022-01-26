@@ -7,6 +7,15 @@ function App() {
   const [movieName, setMovieName] = useState("");
   const [review, setReview] = useState("");
   
+  //Display all movie reviews after the form
+  useEffect(()=> {
+    //make an axios request
+    //the response variable will contain the JSON from back end
+    Axios.get("http://localhost:3001/api/get").then((response)=>{
+      console.log(response);
+    });
+  }, []);
+
   //Function to be called whenever the submit button is pressed
   const submitReview = () => {
     //post request on axios sending info on the form to the backend
