@@ -12,7 +12,7 @@ function App() {
     //make an axios request
     //the response variable will contain the JSON from back end
     Axios.get("http://localhost:3001/api/get").then((response)=>{
-      console.log(response);
+      console.log(response.data);
     });
   }, []);
 
