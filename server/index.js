@@ -42,7 +42,10 @@ app.get("/api/get", (req,res) => {
     db.query(sqlSelect,(err, result) => {
         //console.log(result);
         //console log the error
-        console.log(result);
+       // console.log(result);
+
+       //Send data from DB to front end
+       res.send(result);
     });
 })
 
