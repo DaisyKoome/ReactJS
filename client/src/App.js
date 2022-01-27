@@ -34,8 +34,11 @@ function App() {
       //parse 2 variables as an object from frontend
       movieName: movieName, 
       movieReview: review,
-    }).then(() => {
-      alert("Successful insert");
+    });
+
+      setMovieList([
+        ...movieReviewList,
+        { movieName: movieName, movieReview: review },
     });
   };
 
