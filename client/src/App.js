@@ -39,7 +39,7 @@ function App() {
       setMovieList([
         ...movieReviewList,
         { movieName: movieName, movieReview: review },
-    });
+      ]);
   };
 
   return (
