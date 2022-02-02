@@ -1,8 +1,9 @@
 //The server will run through this file
 //Create express server
-
+//Cors enables cross platform interaction (send data from front to backend)
 const express = require("express");
 const mysql = require("mysql");
+const cors = require ("cors");
 
 //axios replicates the fetch function  where you can make HTTP requests
 
@@ -10,6 +11,7 @@ const app = express();
 
 //passes every JSON object sent from front end
 app.use(express.json());
+app.use(cors());
 
 //make the server do sth - send a hello world response to the front end on the index page/route
 //res is resource, req is require - both are parameters
@@ -41,10 +43,6 @@ app.post('/register', (req, res)=>{
     [username, password], 
     (err, result)=>{
         console.log(err);
-    })
-})
-
-//port, arrow function
-app.listen(3001, () => {
-    console.log("Running server");
+    });
 });
+

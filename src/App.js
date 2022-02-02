@@ -13,7 +13,7 @@ function App() {
   (for insertion into DB) when submit button is clicked
   - Parse in it an object with uname and pswd properties*/
   const register = () => {
-    Axios.post('https://localhost:3001/register', {
+    Axios.post('http://localhost:3001/register', {
       //these 2 variables are being sent to the backend
       username:usernameReg, 
       password:passwordReg
