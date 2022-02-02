@@ -8,6 +8,7 @@ const mysql = require("mysql");
 
 const app = express();
 
+//passes every JSON object sent from front end
 app.use(express.json());
 
 //make the server do sth - send a hello world response to the front end on the index page/route
@@ -25,6 +26,16 @@ const db = mysql.createConnection({
 //parse uname, psw from frontend to backend
 //create a route
 app.post('/register', (req, res)=>{
+
+    /*
+    Grab uname, psw variables from front end and pass to SQL query
+     */
+    /*create variables called username, password equal to 
+    the variables set  in the frontend (in the register function)*/
+
+    const username = req.body.username;
+    const password = req.body.password;
+
     //query to insert new user into DB
     db.query("INSERT INTO users (username, password) VALUES (?,?)", 
     [username, password], 
