@@ -4,6 +4,8 @@
 const express = require("express");
 const mysql = require("mysql");
 
+//axios replicates the fetch function  where you can make HTTP requests
+
 const app = express();
 
 app.use(express.json());
@@ -16,8 +18,20 @@ const db = mysql.createConnection({
     user: "root",
     host: "localhost",
     password: "password",
-    database: "LoginSystem"
+    database: "reg_log"
 });
+
+//call HTTP request
+//parse uname, psw from frontend to backend
+//create a route
+app.post('/register', (req, res)=>{
+    //query to insert new user into DB
+    db.query("INSERT INTO users (username, password) VALUES (?,?)", 
+    [username, password], 
+    (err, result)=>{
+        console.log(err);
+    })
+})
 
 //port, arrow function
 app.listen(3001, () => {
