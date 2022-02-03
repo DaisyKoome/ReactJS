@@ -46,3 +46,44 @@ app.post('/register', (req, res)=>{
     });
 });
 
+//add a route for login
+app.post('/login', (req, res)=>{
+
+    /*
+    Grab uname, psw variables from front end and pass to SQL query
+     */
+    /*create variables called username, password equal to 
+    the variables set  in the frontend (in the register function)*/
+
+    const username = req.body.username;
+    const password = req.body.password;
+
+    //query to insert new user into DB
+    db.query("SELECT * FROM users WHERE username = ? AND password = ?", 
+    [username, password], 
+    (err, result)=>{
+        //frontend is expecting an object response
+        //if there's an error, send an object with a property called error
+        //no elese statement needed or an error 
+        //coz once it occurs everything after it is ignored
+        if (err)
+        {
+            res.send({err: err});
+        }
+            //if no error, the program will continue
+            //else if no error and a user is found instead
+            // send result of the found user to front end
+            if (result)
+            {
+                res.send(result);
+            } else {
+                //if no error but no user, send a message object
+                res.send({message:"Wrong username/password combination!"});
+            }
+
+    });
+});
+
+app.listen(3001, () => {
+    console.log("running server");
+})
