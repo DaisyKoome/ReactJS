@@ -5,9 +5,13 @@ import './App.css';
 
 function App() {
 
-  //create 2 states
+  //create 2 states for registration
   const[ usernameReg, setUsernameReg ] = useState('');
   const[ passwordReg, setPasswordReg ] = useState('');
+
+  //states for login
+  const[ username, setUsername ] = useState('');
+  const[ password, setPassword ] = useState('');  
 
   /*create a function that makes the data go to backend 
   (for insertion into DB) when submit button is clicked
@@ -41,12 +45,19 @@ function App() {
           }} name="password"/>
           <button onClick = {register}>Register</button>
       </div>
+
+
+
       <div className="form login">
         <h1>Login</h1>
           <label>Username:</label>
-          <input type="text" name="userName" placeholder="Username ..."/>
+          <input type="text" onChange={(e) => {
+            setUsername(e.target.value);
+          }} name="usernameLog" placeholder="Username ..."/>
           <label>Password:</label>
-          <input type="text" name="password" placeholder="Password ..."/>
+          <input type="text" onChange={(e) => {
+            setUserPassword(e.target.value);
+          }} name="passwordLog" placeholder="Password ..."/>
           <button>Register</button>
       </div>
     </div>
