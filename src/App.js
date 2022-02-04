@@ -20,7 +20,20 @@ function App() {
     Axios.post('http://localhost:3001/register', {
       //these 2 variables are being sent to the backend
       username:usernameReg, 
-      password:passwordReg
+      password:passwordReg,
+      //then grab the response and console.log it
+    }).then((response)=> {
+      /* if an error occurs, we'll see it 
+      if no error, a response will still be displayed*/
+      console.log(response);
+    });
+  };
+
+  const login = () => {
+    Axios.post('http://localhost:3001/login', {
+      //these 2 variables are being sent to the backend
+      username:username, 
+      password:password,
       //then grab the response and console.log it
     }).then((response)=> {
       /* if an error occurs, we'll see it 
@@ -56,9 +69,9 @@ function App() {
           }} name="usernameLog" placeholder="Username ..."/>
           <label>Password:</label>
           <input type="text" onChange={(e) => {
-            setUserPassword(e.target.value);
+            setPassword(e.target.value);
           }} name="passwordLog" placeholder="Password ..."/>
-          <button>Register</button>
+          <button onClick = {login}>Login</button>
       </div>
     </div>
   );

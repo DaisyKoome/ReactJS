@@ -73,7 +73,7 @@ app.post('/login', (req, res)=>{
             //if no error, the program will continue
             //else if no error and a user is found instead
             // send result of the found user to front end
-            if (result)
+            if (result.length > 0)
             {
                 res.send(result);
             } else {
