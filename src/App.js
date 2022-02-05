@@ -13,6 +13,9 @@ function App() {
   const[ username, setUsername ] = useState('');
   const[ password, setPassword ] = useState('');  
 
+  //create state to show whether we are logged in or not
+  const [loginStatus, setLoginStatus] = useState("");
+
   /*create a function that makes the data go to backend 
   (for insertion into DB) when submit button is clicked
   - Parse in it an object with uname and pswd properties*/
@@ -38,7 +41,13 @@ function App() {
     }).then((response)=> {
       /* if an error occurs, we'll see it 
       if no error, a response will still be displayed*/
-      console.log(response);
+
+      if (response.data.message){
+        setLoginStatus(response.data.message);
+      } else {
+        setLoginStatus(response.data[0].username);
+      }
+
     });
   };
 
@@ -73,6 +82,7 @@ function App() {
           }} name="passwordLog" placeholder="Password ..."/>
           <button onClick = {login}>Login</button>
       </div>
+      <h1>{ loginStatus }</h1>
     </div>
   );
 }
