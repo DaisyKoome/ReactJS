@@ -7,6 +7,11 @@ const cors = require ("cors");
 
 //axios replicates the fetch function  where you can make HTTP requests
 
+//Encryption algorithm - bcrypt
+const bcrypt = require("bcrypt");
+//property to be used in our passwords - saltRounds
+const saltRounds = 10;
+
 const app = express();
 
 //Initializing middlewares
@@ -39,11 +44,22 @@ app.post('/register', (req, res)=>{
     const username = req.body.username;
     const password = req.body.password;
 
-    //query to insert new user into DB
-    db.query("INSERT INTO users (username, password) VALUES (?,?)", 
-    [username, password], 
-    (err, result)=>{
-        console.log(err);
+    //Before inserting pswd into DB, encrypt it first
+    //using hash function of bcrypt algorithm
+    bcrypt.hash(password, saltRounds, (err, hash) => {
+        //first check if there were any errors during the hashing process
+        if (err){
+            console.log(err);
+        }
+
+        //query to insert new user into DB
+        //the hash variable will be used 
+        //coz it represents the hashed version of the password
+        db.query("INSERT INTO users (username, password) VALUES (?,?)", 
+        [username, password], 
+        (err, result)=>{
+            console.log(err);
+        });        
     });
 });
 
@@ -59,9 +75,11 @@ app.post('/login', (req, res)=>{
     const username = req.body.username;
     const password = req.body.password;
 
-    //query to insert new user into DB
-    db.query("SELECT * FROM users WHERE username = ? AND password = ?", 
-    [username, password], 
+    //the hashed password needs to be decrypted during login 
+    //query to verify user from DB
+    //verify username only first
+    db.query("SELECT * FROM users WHERE username = ?", 
+    username, 
     (err, result)=>{
         //frontend is expecting an object response
         //if there's an error, send an object with a property called error
@@ -76,7 +94,13 @@ app.post('/login', (req, res)=>{
             // send result of the found user to front end
             if (result.length > 0)
             {
-                res.send(result);
+                //now check if pswd corresponds to username
+                //using compare function of bcrypt algorithm
+                //comparison btwn password(from login form) and hashed pswd in DB
+                //result is an array
+                //The right username will produce a result of only 1 array element
+                //use different names for error and result so as not to clash with the ones defined earlier
+                bcrypt.compare(password, result[0].password, (error, response));
             } else {
                 //if no error but no user, send a message object
                 res.send({message:"Wrong username/password combination!"});
