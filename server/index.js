@@ -56,7 +56,7 @@ app.post('/register', (req, res)=>{
         //the hash variable will be used 
         //coz it represents the hashed version of the password
         db.query("INSERT INTO users (username, password) VALUES (?,?)", 
-        [username, password], 
+        [username, hash], 
         (err, result)=>{
             console.log(err);
         });        
@@ -100,10 +100,16 @@ app.post('/login', (req, res)=>{
                 //result is an array
                 //The right username will produce a result of only 1 array element
                 //use different names for error and result so as not to clash with the ones defined earlier
-                bcrypt.compare(password, result[0].password, (error, response));
+                bcrypt.compare(password, result[0].password, (error, response)=> {
+                    if (response) {
+                        res.send(result);
+                    } else {
+                        res.send({message:"Wrong username/password combination!"});
+                    }
+                });
             } else {
                 //if no error but no user, send a message object
-                res.send({message:"Wrong username/password combination!"});
+                res.send({message:"User doesn't exist"});
             }
 
     });
