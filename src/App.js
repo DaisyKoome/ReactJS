@@ -61,7 +61,7 @@ function App() {
             setUsernameReg(e.target.value);
           }} name="userName"/>
           <label>Password:</label>
-          <input type="text" 
+          <input type="password" 
           onChange={(e) => {
             setPasswordReg(e.target.value);
           }} name="password"/>
@@ -77,7 +77,7 @@ function App() {
             setUsername(e.target.value);
           }} name="usernameLog" placeholder="Username ..."/>
           <label>Password:</label>
-          <input type="text" onChange={(e) => {
+          <input type="password" onChange={(e) => {
             setPassword(e.target.value);
           }} name="passwordLog" placeholder="Password ..."/>
           <button onClick = {login}>Login</button>
