@@ -5,6 +5,18 @@ const express = require("express");
 const mysql = require("mysql");
 const cors = require ("cors");
 
+//bodyParser for elements we get from frontend
+const bodyParser = require ("body-parser");
+
+//cookieParser for parsing cookies
+const cookieParser = require ("cookie-parser");
+
+//express session for creating, maintaining sessions
+//express on its own creates stateless http servers
+//with express-session the state o the session can be stored
+//so that user is kept logged in when a new tab is opened or when the page is refreshed
+const session = require ("express-session");
+
 //axios replicates the fetch function  where you can make HTTP requests
 
 //Encryption algorithm - bcrypt
@@ -17,7 +29,11 @@ const app = express();
 //Initializing middlewares
 //passes every JSON object sent from front end
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    //set origin - array of all the urls we'll be using
+    //include the frontend which is on localhost 3000
+    origin: ["http://localhost:3000/"]
+}));
 
 //make the server do sth - send a hello world response to the front end on the index page/route
 //res is resource, req is require - both are parameters
