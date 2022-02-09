@@ -32,7 +32,11 @@ app.use(express.json());
 app.use(cors({
     //set origin - array of all the urls we'll be using
     //include the frontend which is on localhost 3000
-    origin: ["http://localhost:3000/"]
+    origin: ["http://localhost:3000/"],
+    //methods we're using
+    methods: ["GET", "POST"],
+    //allow the cookie to be enabled by setting credentials to true
+    credentials: true
 }));
 
 //make the server do sth - send a hello world response to the front end on the index page/route
