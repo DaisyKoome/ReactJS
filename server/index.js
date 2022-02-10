@@ -38,6 +38,25 @@ app.use(cors({
     //allow the cookie to be enabled by setting credentials to true
     credentials: true
 }));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+
+//Initialize session
+//Pass info for the session
+//key is the name of the cookie being created
+//cookie set to expire after 24 hours
+//so a user will remain logged in for 24 hours
+app.use(
+    session({
+    key: "userId",
+    secret: "deedee",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 60*60*24,
+    },
+})
+);
 
 //make the server do sth - send a hello world response to the front end on the index page/route
 //res is resource, req is require - both are parameters
