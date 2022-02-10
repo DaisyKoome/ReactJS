@@ -141,6 +141,13 @@ app.post('/login', (req, res)=>{
                 //use different names for error and result so as not to clash with the ones defined earlier
                 bcrypt.compare(password, result[0].password, (error, response)=> {
                     if (response) {
+                        //Create a session called user
+                        //It's going to contain the result that was fetched
+                        //so that upon refresh the session can be called until the cookie expires
+                        // to create a session => req.session.<name of session>
+                        //set the user session to contain the user result gotten from the DB
+                        req.session.user = result;
+                        console.log(req.session.user);
                         res.send(result);
                     } else {
                         res.send({message:"Wrong username/password combination!"});
