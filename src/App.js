@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 //axios replicates fetch function for making http requests
 import Axios from 'axios'
 import './App.css';
@@ -16,6 +16,7 @@ function App() {
   //create state to show whether we are logged in or not
   const [loginStatus, setLoginStatus] = useState("");
 
+  Axios.defaults.withCredentials = true;
   /*create a function that makes the data go to backend 
   (for insertion into DB) when submit button is clicked
   - Parse in it an object with uname and pswd properties*/
@@ -51,6 +52,14 @@ function App() {
     });
   };
 
+  useEffect(()=>{
+      Axios.get("http://localhost:3001/login").then((response)=>{
+          if(response.data.loggedIn == true){
+          setLoginStatus(response.data.user[0].username);
+          }
+      });
+  }, [])
+
   return (
     <div className="App">
       <div className="form registration">
@@ -61,7 +70,7 @@ function App() {
             setUsernameReg(e.target.value);
           }} name="userName"/>
           <label>Password:</label>
-          <input type="password" 
+          <input type="text" 
           onChange={(e) => {
             setPasswordReg(e.target.value);
           }} name="password"/>
@@ -77,7 +86,7 @@ function App() {
             setUsername(e.target.value);
           }} name="usernameLog" placeholder="Username ..."/>
           <label>Password:</label>
-          <input type="password" onChange={(e) => {
+          <input type="text" onChange={(e) => {
             setPassword(e.target.value);
           }} name="passwordLog" placeholder="Password ..."/>
           <button onClick = {login}>Login</button>
