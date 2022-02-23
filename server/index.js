@@ -1,10 +1,12 @@
 //The server will run through this file
 //Create express server
 
-const express = require('express')
+const express = require('express');
 const app = express();
+const cors = require ("cors");
 
 app.use(express.json());
+app.use(cors());
 
 //make the server do sth - send a hello world response to the front end on the index page/route
 //res is resource, req is require - both are parameters
