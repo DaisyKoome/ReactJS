@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function home() {
+function Home() {
 
   //state containing all posts from the API request
   const[listOfPosts, setListOfPosts] = useState([]);
@@ -29,6 +29,7 @@ function home() {
 
     </div>
   )
+
 }
 
-export default home
+export default Home;
