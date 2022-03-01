@@ -1,8 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 function CreatePost() {
   return (
-    <div>CreatePost</div>
+    <div className='createPostPage'>
+      <Formik>
+        <Form>
+          <Field id="inputCreatePost" name="title" placeholder="(Title)" />
+        </Form>
+      </Formik>
+    </div>
   )
 }
 
