@@ -3,6 +3,7 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 //Yup is a library for form validation
 import * as Yup from 'yup';
+import axios from "axios";
 
 function CreatePost() {
 
@@ -23,8 +24,12 @@ function CreatePost() {
 
   //onSubmit Formik automatically parses the data as an argument to this function
   //another object
+  //the body is the data variable - parse it into the posts endpoint
+  //it will run the request, finalize on it then grab the response
   const onSubmit = (data) => {
-      console.log(data);
+    axios.post("http://localhost:3001/posts", data).then((response) => {
+      console.log("It works!");
+    });
   };
 
   return (
